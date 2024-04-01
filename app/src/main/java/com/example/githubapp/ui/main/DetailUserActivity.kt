@@ -14,6 +14,8 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_USERNAME = "extra_username"
+        const val URL:String = "url"
+        var Url:String = ""
     }
 
     private lateinit var binding: ActivityDetailUserBinding
@@ -25,6 +27,10 @@ class DetailUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
+        val url = intent.getStringExtra(URL)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_USERNAME,username)
+        bundle.putString(URL,url)
 
         viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
         if (username != null) {
@@ -45,7 +51,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
-        val sectionPagerAdapter = SectionPagerAdapter(this,supportFragmentManager)
+        val sectionPagerAdapter = SectionPagerAdapter(this,supportFragmentManager, bundle)
         binding.apply {
             viewPager.adapter = sectionPagerAdapter
             tabs.setupWithViewPager(viewPager)
