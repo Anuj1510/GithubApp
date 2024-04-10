@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.githubapp.R
 import com.example.githubapp.adapter.RepoAdapter
 import com.example.githubapp.adapter.UserAdapter
+import com.example.githubapp.data.model.Repo
 import com.example.githubapp.databinding.FragmentFollowBinding
 import com.example.githubapp.databinding.FragmentFollowingBinding
 import com.example.githubapp.databinding.FragmentReposBinding
@@ -38,7 +39,7 @@ class ReposFragment:Fragment(R.layout.fragment_repos) {
         _binding = FragmentReposBinding.bind(view)
 
 
-        adapter = RepoAdapter()
+        adapter = RepoAdapter(requireContext())
         adapter.notifyDataSetChanged()
 
         binding.apply {
