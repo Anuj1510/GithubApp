@@ -1,5 +1,6 @@
 package com.example.githubapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubapp.R
 import com.example.githubapp.adapter.UserAdapter
+import com.example.githubapp.data.model.User
 import com.example.githubapp.databinding.FragmentFollowBinding
 import com.example.githubapp.databinding.FragmentFollowingBinding
 import com.example.githubapp.ui.main.DetailUserActivity
@@ -47,6 +49,18 @@ class FollowingFragment:Fragment(R.layout.fragment_following) {
                 showLoading(false)
             }
         }
+
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: User) {
+                Intent(requireContext(),DetailUserActivity::class.java).also {
+                    it.putExtra(DetailUserActivity.EXTRA_USERNAME,data.login)
+                    it.putExtra(DetailUserActivity.EXTRA_ID,data.id)
+                    it.putExtra(DetailUserActivity.URL,data.avatar_url)
+                    startActivity(it)
+                }
+            }
+
+        })
 
     }
 
